@@ -15,6 +15,7 @@ import lunchRestaurantsService from "./domain/lunchRestaurantsService.js";
 
 import emptyStar from "../public/icons/favorite-icon-lined.png";
 import filledStar from "../public/icons/favorite-icon-filled.png";
+import { filterByFavorite } from "./domain/utils/sortAndFilter.js";
 
 class App extends Component {
   setup() {
@@ -229,9 +230,7 @@ class App extends Component {
   }
 
   renderFavoriteTab() {
-    const restaurantsToRender = this.state.restaurants.filter(
-      ({ isFavorite }) => isFavorite
-    );
+    const restaurantsToRender = filterByFavorite(this.state.restaurants);
 
     this.renderRestaurantList(
       this.props.lunchDomain.filterAndSortRestaurants(restaurantsToRender)

@@ -36,12 +36,7 @@ export const sorting = (
 };
 
 export const filterByFavorite = (
-  restaurants: RestaurantInfoWithAdditionalInfo[],
-  restaurantId: string
+  restaurants: RestaurantInfoWithAdditionalInfo[]
 ) => {
-  return restaurants.map((restaurant) =>
-    restaurant.id === restaurantId
-      ? { ...restaurant, isFavorite: !restaurant.isFavorite }
-      : restaurant
-  );
+  return restaurants.filter(({ isFavorite }) => isFavorite);
 };

@@ -11,7 +11,6 @@ import {
   sorting,
   SortOptions,
   CategoryFilterOptions,
-  filterByFavorite,
 } from "./utils/sortAndFilter.js";
 
 export type Category = (typeof RESTAURANT_RULES.CATEGORIES)[number];
@@ -89,7 +88,11 @@ const lunchRestaurantsService = {
     restaurants: RestaurantInfoWithAdditionalInfo[],
     restaurantId: string
   ) {
-    const updatedRestaurants = filterByFavorite(restaurants, restaurantId);
+    const updatedRestaurants = restaurants.map((restaurant) =>
+      restaurant.id === restaurantId
+        ? { ...restaurant, isFavorite: !restaurant.isFavorite }
+        : restaurant
+    );
     this.saveRestaurants(updatedRestaurants);
     return updatedRestaurants;
   },
