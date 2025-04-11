@@ -346,6 +346,7 @@ class AddRestaurantModal extends Modal {
       try {
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData.entries());
+        console.log(data);
         this.validateData(data);
         this.props.updateRestaurant(data);
         this.close();
@@ -709,6 +710,9 @@ class App extends Component {
     this.addNewRestaurantToUI(newRestaurantWithId);
   }
   addNewRestaurantToUI(newRestaurant) {
+    if (this.state.activeTab === "favorite") {
+      return;
+    }
     const $categoryFilter = $(document, "#category-filter");
     if ($categoryFilter.value !== "전체" && $categoryFilter.value !== newRestaurant.category) {
       return;
